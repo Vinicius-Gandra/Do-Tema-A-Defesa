@@ -85,7 +85,7 @@
     </div>
     <div class="video-wrap" id="ytBox">
       <div id="ytPlayer" class="absolute inset-0 w-full h-full"></div>
-      <button id="ytUnmute" class="sans absolute bottom-4 left-1/2 -translate-x-1/2 z-10 font-bold px-5 py-3 rounded-full text-gray-900 shadow-2xl animate-bounce" style="background:linear-gradient(135deg,#b08d57,#d4af6a)">🔊 Toque para ouvir</button>
+      <button id="ytUnmute" class="sans absolute bottom-4 left-1/2 -translate-x-1/2 z-10 font-bold px-5 py-3 rounded-full text-gray-900 shadow-2xl animate-bounce" style="background:linear-gradient(135deg,#b08d57,#d4af6a)">▶ Reproduzir vídeo</button>
     </div>
 
 
@@ -282,7 +282,7 @@ let offerVisible=false;
 new IntersectionObserver(e=>{offerVisible=e[0].isIntersecting;toggle()},{threshold:.2}).observe(of);
 function toggle(){sc.classList.toggle('show',window.scrollY>500&&!offerVisible)}
 window.addEventListener('scroll',toggle,{passive:true});
-document.getElementById('ytPlay').onclick=()=>{
+document.getElementById('ytUnmute').onclick=()=>{
   document.getElementById('ytBox').innerHTML=`<iframe
     src="https://www.youtube-nocookie.com/embed/iRUPO_Uen4g?autoplay=1&rel=0&playsinline=1"
     title="Vídeo da autora" frameborder="0"
