@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><script src="https://myhub.ia.br/canvas-vendor/tailwind.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do Tema à Defesa | Guia Prático de Pesquisa Jurídica</title>
+<style>
+  body{font-family:Georgia,'Times New Roman',serif;background:#faf7f2;color:#1f2937}
+  .sans{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .gold{color:#b08d57}.bg-gold{background:#b08d57}.bg-navy{background:#14213d}
+  .reveal{opacity:0;transform:translateY(30px);transition:all .8s ease}
+  .reveal.show{opacity:1;transform:none}
+  .cta{background:linear-gradient(135deg,#b08d57,#d4af6a);box-shadow:0 10px 30px -10px rgba(176,141,87,.7);transition:transform .2s}
+  .cta:hover{transform:translateY(-3px) scale(1.02)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .strike{text-decoration:line-through;opacity:.6}
+  .book{transform:perspective(900px) rotateY(-18deg);box-shadow:25px 25px 50px rgba(0,0,0,.45)}
+  @media(max-width:767px){.book{transform:perspective(900px) rotateY(-10deg)}}
+  /* Espaços para imagem: troque o src; se a imagem não existir, aparece o aviso */
+  .slot{position:relative;overflow:hidden;background:repeating-linear-gradient(45deg,#efe6d6,#efe6d6 12px,#e7dcc8 12px,#e7dcc8 24px);border:2px dashed #b08d57}
+  .slot>span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;font:600 .8rem system-ui;color:#8a6d3f}
+  .slot>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .slot.has-img{border:none}
+  .video-wrap{position:relative;aspect-ratio:9/16;width:100%;max-width:340px;margin:auto;border-radius:1.5rem;overflow:hidden;box-shadow:0 25px 50px -12px rgba(20,33,61,.5);border:4px solid #b08d57}
+  .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%}
+  .carousel{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 1.5rem 1rem;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .carousel::-webkit-scrollbar{display:none}
+  .carousel>*{scroll-snap-align:center;flex:0 0 75%}
+  @media(min-width:768px){.carousel>*{flex:0 0 30%}}
+  .sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:50;transform:translateY(110%);transition:transform .35s ease}
+  .sticky-cta.show{transform:none}
+  html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="bg-navy text-white relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6 py-12 md:py-20 grid md:grid-cols-2 gap-10 md:gap-12 items-center text-center md:text-left">
+    <div class="order-2 md:order-1">
+      <p class="sans uppercase tracking-widest text-sm gold mb-4">Do Tema à Defesa: Guia Prático de Pesquisa Jurídica</p>
+      <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-6">Seu TCC não está travado por falta de capacidade.<br><span class="gold">Está travado por falta de método.</span></h1>
+      <p class="sans text-lg text-gray-300 mb-8">O guia prático para estudantes de Direito saírem da página em branco e chegarem à banca com segurança.</p>
+      <a href="#oferta" class="cta sans block md:inline-block font-bold px-8 py-4 rounded-full text-lg text-gray-900">Quero destravar minha pesquisa →</a>
+      <p class="sans text-sm text-gray-400 mt-4">✔ Para TCC, dissertação e também tese de mestrado</p>
+    </div>
+    <div class="flex justify-center order-1 md:order-2">
+      <div class="book relative overflow-hidden w-52 h-72 md:w-64 md:h-96 rounded-r-lg p-6 md:p-8 flex flex-col justify-between text-left" style="background:linear-gradient(160deg,#1d2d50,#0b1426);border-left:10px solid #b08d57">
+        <!-- IMAGEM: capa do e-book (proporção 2:3) -->
+        <img src="capa-ebook.jpg" alt="Capa do e-book Do Tema à Defesa" class="absolute inset-0 w-full h-full object-cover z-10" onerror="this.remove()">
+        <p class="sans text-xs tracking-widest gold">GUIA PRÁTICO</p>
+        <div>
+          <h2 class="text-3xl font-bold leading-tight">Do Tema<br>à Defesa</h2>
+          <div class="h-1 w-16 bg-gold my-4"></div>
+          <p class="sans text-sm text-gray-300">Guia Prático de Pesquisa Jurídica</p>
+        </div>
+        <p class="sans text-xs text-gray-400">Jéssica Helena Braga Araújo</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- DOR -->
+<section class="max-w-4xl mx-auto px-6 py-20 reveal">
+  <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Você se reconhece em alguma dessas situações?</h2>
+  <div class="sans grid md:grid-cols-2 gap-4">
+    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-400">😶 Abre o documento, encara a tela e não sai nada.</div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-400">📚 Lê dezenas de artigos, mas só acumula referências.</div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-400">❓ Não sabe a diferença entre problema, hipótese e objetivo.</div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-400">🔄 Escreve, apaga, reescreve… e nada parece bom o bastante.</div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-400">🧭 Sente que seu orientador não está te orientando de verdade.</div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-400">😰 Já pensa na banca com medo das perguntas.</div>
+  </div>
+  <p class="text-center text-xl mt-12">Se marcou pelo menos uma, respire. <strong>O problema não é você.</strong> É a falta de um mapa.</p>
+</section>
+
+<!-- VÍDEO -->
+<section class="bg-navy text-white py-16 md:py-20 reveal">
+  <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+    <div class="text-center md:text-left">
+      <p class="sans uppercase tracking-widest text-sm gold mb-3">▶ Assista em menos de 1 minuto</p>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Ouça da própria autora por que o método muda tudo</h2>
+      <p class="sans text-gray-300 mb-6">Sem rodeio: o erro que trava a maioria dos TCCs e o que fazer primeiro.</p>
+      <a href="#oferta" class="cta sans hidden md:inline-block font-bold px-8 py-4 rounded-full text-gray-900">Quero o guia →</a>
+    </div>
+    <div class="video-wrap" id="ytBox">
+      <div id="ytPlayer" class="absolute inset-0 w-full h-full"></div>
+      <button id="ytUnmute" class="sans absolute bottom-4 left-1/2 -translate-x-1/2 z-10 font-bold px-5 py-3 rounded-full text-gray-900 shadow-2xl animate-bounce" style="background:linear-gradient(135deg,#b08d57,#d4af6a)">🔊 Toque para ouvir</button>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- HISTÓRIA -->
+<section class="bg-white py-20 reveal">
+  <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-5 gap-10 items-center">
+    <div class="md:col-span-2 flex justify-center">
+      <div class="relative w-64 h-80">
+        <!-- IMAGEM: foto da Jéssica (retrato vertical 4:5) -->
+        <div class="slot w-full h-full rounded-2xl"><span>📷 foto-jessica.jpg<br>(retrato 4:5)</span><img src="foto-jessica.jpg" alt="Jéssica Helena Braga Araújo" onerror="this.remove()" onload="this.parentElement.classList.add('has-img')"></div>
+        <div class="absolute -bottom-5 -right-3 md:-right-5 z-10 bg-gold text-white sans text-sm font-bold px-4 py-3 rounded-xl shadow-lg">Láurea no<br>Mestrado 🏅</div>
+      </div>
+    </div>
+    <div class="md:col-span-3">
+      <p class="sans uppercase tracking-widest text-sm gold mb-2">Quem escreveu este guia</p>
+      <h2 class="text-3xl font-bold mb-6">"Eu também fiquei 3 meses sem escrever uma linha."</h2>
+      <div class="sans space-y-4 text-gray-700 leading-relaxed">
+        <p>Sou <strong>Jéssica Helena Braga Araújo</strong>: Mestre em Direito Processual Civil pela PUC Minas, professora de ensino superior, advogada e avaliadora de bancas de TCC.</p>
+        <p>Comecei a pesquisar em 2015, ainda no início da graduação, e aprendi sozinha. Publiquei artigos, mas sempre sentia falta de técnica.</p>
+        <p>No mestrado, com apenas um ano de prazo, <strong>travei por três meses</strong>. Até que entendi o que faltava: <strong>uma pergunta de pesquisa clara</strong>. A partir dela, tudo fluiu. Terminei, depositei e recebi <strong>láurea com recomendação para publicação</strong>.</p>
+        <p>Este e-book reúne tudo o que aprendi como aluna, mentora e membro de banca, para que você não perca os meses que eu perdi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEÚDO -->
+<section class="max-w-6xl mx-auto px-6 py-20 reveal">
+  <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">O que você vai dominar</h2>
+  <p class="sans text-center text-gray-600 mb-12">A ordem dos capítulos segue o caminho real de uma pesquisa</p>
+  <div class="sans grid md:grid-cols-3 gap-6" id="modulos"></div>
+</section>
+
+<!-- POR DENTRO DO E-BOOK -->
+<section class="py-16 reveal">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-2 px-6">Espie por dentro</h2>
+    <p class="sans text-center text-gray-500 text-sm mb-8">← deslize para ver as páginas →</p>
+    <!-- IMAGENS: páginas internas do e-book (proporção 3:4) -->
+    <div class="carousel">
+      <div class="slot rounded-2xl aspect-[3/4] shadow-lg"><span>📄 pagina-1.jpg</span><img src="pagina-1.jpg" alt="Página do e-book" onerror="this.remove()" onload="this.parentElement.classList.add('has-img')"></div>
+      <div class="slot rounded-2xl aspect-[3/4] shadow-lg"><span>📄 pagina-2.jpg</span><img src="pagina-2.jpg" alt="Página do e-book" onerror="this.remove()" onload="this.parentElement.classList.add('has-img')"></div>
+      <div class="slot rounded-2xl aspect-[3/4] shadow-lg"><span>📄 pagina-3.jpg</span><img src="pagina-3.jpg" alt="Página do e-book" onerror="this.remove()" onload="this.parentElement.classList.add('has-img')"></div>
+      <div class="slot rounded-2xl aspect-[3/4] shadow-lg"><span>📄 pagina-4.jpg</span><img src="pagina-4.jpg" alt="Página do e-book" onerror="this.remove()" onload="this.parentElement.classList.add('has-img')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ANTES/DEPOIS -->
+<section class="bg-navy text-white py-20 reveal">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">A virada que o método provoca</h2>
+    <div class="sans grid md:grid-cols-2 gap-8">
+      <div class="bg-white/5 p-8 rounded-2xl border border-red-400/30">
+        <h3 class="text-xl font-bold text-red-300 mb-4">✖ Sem método</h3>
+        <ul class="space-y-3 text-gray-300">
+          <li>• Texto fragmentado e inseguro</li><li>• Leitura vira acúmulo de PDFs</li>
+          <li>• Cópia de doutrina sem análise</li><li>• Tema amplo demais e impossível de fechar</li><li>• Medo da banca</li>
+        </ul>
+      </div>
+      <div class="bg-white/5 p-8 rounded-2xl border border-yellow-500/40">
+        <h3 class="text-xl font-bold gold mb-4">✔ Com método</h3>
+        <ul class="space-y-3 text-gray-200">
+          <li>• Escrita como consequência natural</li><li>• Você lê só o necessário</li>
+          <li>• Posicionamento próprio e fundamentado</li><li>• Recorte claro e pergunta precisa</li><li>• Segurança para justificar cada escolha</li>
+        </ul>
+      </div>
+    </div>
+    <blockquote class="text-center text-2xl italic mt-14 gold">"Quando você domina seu texto, você não falha."</blockquote>
+  </div>
+</section>
+
+<!-- PARA QUEM -->
+<section class="max-w-5xl mx-auto px-6 py-20 reveal">
+  <h2 class="text-3xl font-bold text-center mb-10">Este guia é para você que…</h2>
+  <div class="sans grid sm:grid-cols-2 md:grid-cols-4 gap-5 text-center">
+    <div class="bg-white p-6 rounded-xl shadow-sm"><div class="text-4xl mb-3">🎓</div><b>Está na graduação</b><p class="text-sm text-gray-600 mt-2">e precisa de base sólida para o TCC</p></div>
+    <div class="bg-white p-6 rounded-xl shadow-sm"><div class="text-4xl mb-3">🧩</div><b>Já começou e se perdeu</b><p class="text-sm text-gray-600 mt-2">no meio do caminho</p></div>
+    <div class="bg-white p-6 rounded-xl shadow-sm"><div class="text-4xl mb-3">📜</div><b>É mestrando</b><p class="text-sm text-gray-600 mt-2">e quer refinar a técnica científica</p></div>
+    <div class="bg-white p-6 rounded-xl shadow-sm"><div class="text-4xl mb-3">🧭</div><b>Não tem boa orientação</b><p class="text-sm text-gray-600 mt-2">e precisa de um norte confiável</p></div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="bg-white py-16 reveal">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-2 px-6">Quem aplicou, destravou</h2>
+    <p class="sans text-center text-gray-500 text-sm mb-8">Prints reais de alunos e mentorados</p>
+    <!-- IMAGENS: prints de depoimentos (vertical 9:16) -->
+    <div class="carousel">
+      <div class="slot rounded-2xl aspect-[9/16] shadow-lg"><span>💬 depoimento-1.jpg</span><img src="depoimento-1.jpg" alt="Depoimento" onerror="this.remove()" onload="this.parentElement.classList.add('has-img')"></div>
+      <div class="slot rounded-2xl aspect-[9/16] shadow-lg"><span>💬 depoimento-2.jpg</span><img src="depoimento-2.jpg" alt="Depoimento" onerror="this.remove()" onload="this.parentElement.classList.add('has-img')"></div>
+      <div class="slot rounded-2xl aspect-[9/16] shadow-lg"><span>💬 depoimento-3.jpg</span><img src="depoimento-3.jpg" alt="Depoimento" onerror="this.remove()" onload="this.parentElement.classList.add('has-img')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section id="oferta" class="py-16 md:py-20 reveal" style="background:linear-gradient(180deg,#faf7f2,#efe6d6)">
+  <div class="max-w-xl mx-auto px-4 md:px-6">
+    <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 text-center border-t-8" style="border-color:#b08d57">
+      <!-- IMAGEM: mockup do e-book (celular/tablet, 16:10) -->
+      <div class="slot rounded-2xl aspect-[16/10] mb-6"><span>🖼️ mockup-ebook.png</span><img src="mockup-ebook.png" alt="Mockup do e-book" class="!object-contain bg-white" onerror="this.remove()" onload="this.parentElement.classList.add('has-img')"></div>
+      <p class="sans uppercase tracking-widest text-sm gold mb-2">Acesso imediato</p>
+      <h2 class="text-3xl font-bold mb-6">Do Tema à Defesa</h2>
+      <ul class="sans text-left space-y-3 mb-8 text-gray-700">
+        <li>✔ E-book completo com 44 páginas</li>
+        <li>✔ Fórmula prática para a pergunta de pesquisa</li>
+        <li>✔ Mais de 10 exemplos de perguntas por área do Direito</li>
+        <li>✔ Tabela de métodos com seus autores-base</li>
+        <li>✔ Roteiro de apresentação para a banca</li>
+      </ul>
+      <p class="sans strike">De R$ 97,00</p>
+      <p class="sans text-gray-500">por apenas</p>
+      <p class="text-5xl md:text-6xl font-bold my-2 text-gray-900">R$ 47<span class="text-2xl">,00</span></p>
+      <p class="sans text-sm text-gray-500 mb-8">ou em até 5x no cartão</p>
+      <a href="#" class="cta sans block text-gray-900 font-bold py-5 rounded-full text-lg">QUERO MEU E-BOOK AGORA</a>
+      <p class="sans text-xs text-gray-500 mt-4">🔒 Pagamento seguro • 🛡️ Garantia de 7 dias</p>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="max-w-3xl mx-auto px-6 py-16 text-center reveal">
+  <div class="text-6xl mb-4">🛡️</div>
+  <h2 class="text-2xl font-bold mb-3">Garantia incondicional de 7 dias</h2>
+  <p class="sans text-gray-600">Leia, aplique e, se não sentir mais clareza na sua pesquisa, devolvemos 100% do valor. Sem perguntas.</p>
+</section>
+
+<!-- FAQ -->
+<section class="max-w-3xl mx-auto px-6 pb-20 reveal">
+  <h2 class="text-3xl font-bold text-center mb-10">Perguntas frequentes</h2>
+  <div class="sans space-y-3" id="faq"></div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="bg-navy text-white text-center py-20 px-6">
+  <h2 class="text-3xl md:text-4xl font-bold mb-4">O prazo do seu TCC não espera.</h2>
+  <p class="sans text-gray-300 mb-8 max-w-xl mx-auto">Cada semana travado é uma semana a menos para escrever com calma. Comece hoje pelo caminho certo.</p>
+  <a href="#oferta" class="cta sans inline-block text-gray-900 font-bold px-10 py-5 rounded-full text-lg">Quero destravar minha pesquisa</a>
+</section>
+
+<footer class="sans text-center text-sm text-gray-500 pt-8 pb-28 md:pb-8">
+  © 2026 Jéssica Helena Braga Araújo • Todos os direitos reservados
+</footer>
+
+<!-- BARRA FIXA (mobile) -->
+<div id="stickyCta" class="sticky-cta md:hidden sans bg-navy border-t-2 px-4 py-3 flex items-center justify-between gap-3" style="border-color:#b08d57">
+  <div class="text-white leading-tight"><p class="text-xs text-gray-400 strike">R$ 97</p><p class="font-bold text-lg gold">R$ 47</p></div>
+  <a href="#oferta" class="cta flex-1 text-center font-bold py-3 rounded-full text-gray-900">Quero meu e-book</a>
+</div>
+
+<script>
+const modulos=[
+ ["🧱","O que é pesquisa jurídica","Ler, interpretar, sistematizar e demarcar, e por que copiar doutrina não é pesquisa."],
+ ["🎯","Escolha do tema","Interesse, relevância e viabilidade: o filtro de três etapas para um tema que se sustenta."],
+ ["❓","Problema e pergunta","Recorte normativo, temporal, espacial e material, mais a fórmula prática da pergunta."],
+ ["💡","Hipótese, objetivos e justificativa","O bloco lógico que faz o sumário quase se escrever sozinho."],
+ ["🧪","Metodologia na prática","Dogmática x sociológica, método dedutivo, indutivo, dialético e comparativo, com seus autores."],
+ ["🎤","A defesa","7 dicas para apresentar com segurança e responder com tranquilidade até o que você não sabe."]
+];
+document.getElementById('modulos').innerHTML=modulos.map((m,i)=>`
+ <div class="bg-white p-7 rounded-2xl shadow-sm hover:shadow-xl transition">
+  <div class="flex items-center gap-3 mb-3"><span class="text-3xl">${m[0]}</span><span class="text-xs font-bold gold">CAP. ${i+1}</span></div>
+  <h3 class="text-lg font-bold mb-2">${m[1]}</h3><p class="text-gray-600 text-sm">${m[2]}</p></div>`).join('');
+
+const faq=[
+ ["Serve para quem ainda nem escolheu o tema?","Sim. O guia começa exatamente pela escolha e delimitação do tema."],
+ ["Funciona para dissertação de mestrado?","Sim. Foi escrito com base na experiência da autora no mestrado e na mentoria de mestrandos."],
+ ["Como recebo o e-book?","Logo após a confirmação do pagamento, você recebe o PDF por e-mail."],
+ ["Substitui meu orientador?","Não. Ele complementa a orientação e faz suas reuniões renderem muito mais."],
+ ["E se eu não gostar?","Você tem 7 dias de garantia com devolução integral."]
+];
+const f=document.getElementById('faq');
+f.innerHTML=faq.map(q=>`<div class="bg-white rounded-xl shadow-sm">
+ <button class="w-full text-left p-5 font-semibold flex justify-between items-center">${q[0]}<span class="gold text-xl">+</span></button>
+ <div class="faq-a px-5 text-gray-600"><p class="pb-5">${q[1]}</p></div></div>`).join('');
+f.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+ const a=b.nextElementSibling,open=a.style.maxHeight;
+ f.querySelectorAll('.faq-a').forEach(x=>x.style.maxHeight=null);
+ f.querySelectorAll('button span').forEach(s=>s.textContent='+');
+ if(!open){a.style.maxHeight=a.scrollHeight+'px';b.querySelector('span').textContent='−';}
+});
+
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('show')),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Barra fixa: aparece depois do topo e some quando a oferta está visível
+const sc=document.getElementById('stickyCta'),of=document.getElementById('oferta');
+let offerVisible=false;
+new IntersectionObserver(e=>{offerVisible=e[0].isIntersecting;toggle()},{threshold:.2}).observe(of);
+function toggle(){sc.classList.toggle('show',window.scrollY>500&&!offerVisible)}
+window.addEventListener('scroll',toggle,{passive:true});
+document.getElementById('ytPlay').onclick=()=>{
+  document.getElementById('ytBox').innerHTML=`<iframe
+    src="https://www.youtube-nocookie.com/embed/iRUPO_Uen4g?autoplay=1&rel=0&playsinline=1"
+    title="Vídeo da autora" frameborder="0"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+};
+
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+
+</body>
+</html>
