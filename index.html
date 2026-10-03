@@ -85,7 +85,7 @@
     </div>
     <div class="video-wrap" id="ytBox">
       <div id="ytPlayer" class="absolute inset-0 w-full h-full"></div>
-      <button id="ytUnmute" class="sans absolute bottom-4 left-1/2 -translate-x-1/2 z-10 font-bold px-5 py-3 rounded-full text-gray-900 shadow-2xl animate-bounce" style="background:linear-gradient(135deg,#b08d57,#d4af6a)">▶ Reproduzir vídeo</button>
+      <button id="ytSoundBtn" type="button" class="sans absolute bottom-4 left-1/2 -translate-x-1/2 z-10 font-bold px-5 py-3 rounded-full text-gray-900 shadow-2xl" style="background:linear-gradient(135deg,#b08d57,#d4af6a)">🔊 Ativar som</button>
     </div>
 
 
@@ -282,16 +282,35 @@ let offerVisible=false;
 new IntersectionObserver(e=>{offerVisible=e[0].isIntersecting;toggle()},{threshold:.2}).observe(of);
 function toggle(){sc.classList.toggle('show',window.scrollY>500&&!offerVisible)}
 window.addEventListener('scroll',toggle,{passive:true});
-document.getElementById('ytUnmute').onclick=()=>{
-  document.getElementById('ytBox').innerHTML=`<iframe
-    src="https://www.youtube-nocookie.com/embed/iRUPO_Uen4g?autoplay=1&rel=0&playsinline=1"
-    title="Vídeo da autora" frameborder="0"
-    referrerpolicy="strict-origin-when-cross-origin"
-    allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
-};
-
 </script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+let ytPlayerInstance;
+window.onYouTubeIframeAPIReady = function () {
+  ytPlayerInstance = new YT.Player("ytPlayer", {
+    videoId: "iRUPO_Uen4g",
+    playerVars: { autoplay: 1, controls: 1, playsinline: 1, rel: 0 },
+    events: {
+      onReady: function (event) {
+        event.target.mute();
+        event.target.playVideo();
+      }
+    }
+  });
+};
+
+document.getElementById("ytSoundBtn").addEventListener("click", function () {
+  if (!ytPlayerInstance) return;
+  ytPlayerInstance.unMute();
+  ytPlayerInstance.setVolume(100);
+  ytPlayerInstance.playVideo();
+  this.hidden = true;
+});
+
+const youtubeApi = document.createElement("script");
+youtubeApi.src = "https://www.youtube.com/iframe_api";
+document.head.appendChild(youtubeApi);
+</script>
 
 </body>
 </html>
