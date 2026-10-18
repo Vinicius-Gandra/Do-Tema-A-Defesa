@@ -1100,11 +1100,7 @@ $$('[data-wa]').forEach(a => {
   a.href = waLink(a.dataset.wa);
   if (waDigits) { a.rel = 'noopener'; if (!isMobile()) a.target = '_blank'; }
 });
-$$('[data-wa-meta]').forEach(p => {
-  if (!waDigits) return;
-  p.innerHTML = `WhatsApp <b>${fmtPhone(waDigits)}</b>` + (WHATSAPP_HOURS ? `<br>${WHATSAPP_HOURS}` : '');
-  p.hidden = false;
-});
+
 document.addEventListener('click', e => {
   const a = e.target.closest('[data-wa]');
   if (!a) return;
