@@ -1,0 +1,6 @@
+Imagens opcionais do e-book "Do Tema à Defesa".
+Coloque aqui, com estes nomes exatos, e elas aparecem sozinhas na página:
+
+  capa-ebook.jpg     -> substitui a capa desenhada no topo da página
+  mockup-ebook.png   -> substitui o livro desenhado no cartão da oferta (fundo transparente)
+  pagina-1.jpg ... pagina-4.jpg -> mostra a seção "Veja o e-book por dentro" (proporção 3:4)
