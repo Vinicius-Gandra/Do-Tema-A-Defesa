@@ -126,8 +126,10 @@ button{font:inherit}
 .hero-book{position:relative;display:flex;flex-direction:column;align-items:center;gap:20px;padding-top:6px}
 .hero-book::before{content:"";position:absolute;left:50%;top:44%;width:min(120%,520px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(236,211,160,.26),rgba(236,211,160,.07) 55%,transparent);pointer-events:none}
 .book-scene{position:relative;--w:170px;--t:21px;perspective:1100px;padding:10px 30px 0}
-.book{position:relative;width:var(--w);height:calc(var(--w)*1.42);transform-style:preserve-3d;transform:rotateY(28deg) rotateX(4deg) rotateZ(-1deg);animation:book-in 1.1s cubic-bezier(.2,.8,.2,1) both}
-@keyframes book-in{from{opacity:0;transform:rotateY(58deg) rotateX(8deg) translateY(18px)}}
+.hero .book-scene{animation:book-in 1.1s cubic-bezier(.2,.8,.2,1) both}
+/* --ry/--rx/--rz/--ty são atualizados pela rolagem (script "Livro que gira com a rolagem") */
+.book{position:relative;width:var(--w);height:calc(var(--w)*1.42);transform-style:preserve-3d;transform:translateY(var(--ty,0px)) rotateY(var(--ry,28deg)) rotateX(var(--rx,4deg)) rotateZ(var(--rz,-1deg));will-change:transform}
+@keyframes book-in{from{opacity:0;transform:translateY(26px) scale(.95)}}
 .book-face{position:absolute;inset:0;backface-visibility:hidden}
 .book-front{transform:translateZ(calc(var(--t)/2));border-radius:2px 6px 6px 2px;overflow:hidden;
   background:linear-gradient(155deg,#5e1428 0%,#3a0a17 55%,#22050c 100%);
@@ -146,7 +148,7 @@ button{font:inherit}
 .book-spine::after{content:"";position:absolute;left:50%;top:14px;bottom:14px;width:1px;background:var(--gold-400);opacity:.7}
 .book-pages{width:var(--t);left:calc(var(--w) - var(--t)/2);right:auto;top:4px;bottom:4px;height:auto;transform:rotateY(90deg);background:repeating-linear-gradient(90deg,#f7f0e6 0 2px,#ddd0c0 2px 3px)}
 .book-back{transform:rotateY(180deg) translateZ(calc(var(--t)/2));background:#22050c}
-.book-shadow{width:calc(var(--w)*1.15);height:22px;margin:-6px auto 0;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);filter:blur(4px)}
+.book-shadow{width:calc(var(--w)*1.15);height:22px;margin:-6px auto 0;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);filter:blur(4px);transform:scaleX(var(--sh,1));opacity:var(--so,1)}
 .book-caption{position:relative;font-size:.86rem;color:var(--on-dark-2);display:flex;gap:14px}
 .book-caption span+span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--gold-400);margin-right:14px;vertical-align:middle}
 
@@ -321,7 +323,7 @@ section[hidden]{display:none!important}
 .offer-head{position:relative;padding:28px 20px 26px;background:radial-gradient(90% 90% at 70% 15%,var(--wine-700),var(--wine-900) 70%);color:#fff;text-align:center;overflow:hidden}
 .offer-head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--gold-500),var(--gold-300),var(--gold-500))}
 .offer-head .book-scene{--w:128px;--t:16px;padding-top:0;margin:0 auto 2px;display:inline-block}
-.offer-head .book{animation:none;transform:rotateY(26deg) rotateX(4deg)}
+.offer-head .book-scene{--ry:26deg;--rz:0deg}
 .offer-head .bk-title{font-size:1.3rem}
 .offer-head .bk-brow{font-size:.38rem}
 .offer-head .bk-sub,.offer-head .bk-author{font-size:.44rem}
@@ -393,14 +395,69 @@ section[hidden]{display:none!important}
 .share-note{margin:16px auto 0!important;font-size:.88rem;color:var(--on-dark-3)!important}
 .footer{padding:28px var(--gutter) calc(110px + var(--safe-b));text-align:center;font-size:.86rem;color:var(--on-dark-3);background:var(--wine-950);border-top:1px solid var(--line-dark)}
 
+/* ==========================================================================
+   ATENDIMENTO PELO WHATSAPP
+   ========================================================================== */
+:root{--wa:#25d366;--wa-ink:#06210f}
+.wa-ico{width:20px;height:20px;flex:none;fill:currentColor}
+.btn-wa{background:linear-gradient(180deg,#43e283,#25d366 60%,#1fbb5b);color:var(--wa-ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 14px 28px -14px rgba(18,140,74,.75)}
+@media (hover:hover){.btn-wa:hover{transform:translateY(-2px)}}
+.contact-card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.contact-head{position:relative;display:flex;gap:16px;align-items:center;padding:24px 20px 22px;background:radial-gradient(90% 120% at 100% 0%,rgba(217,177,109,.18),transparent 60%),linear-gradient(135deg,var(--wine-800),var(--wine-900));color:var(--on-dark-2)}
+.contact-head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--gold-500),var(--gold-300),var(--gold-500))}
+.contact-avatar{position:relative;flex:none;width:64px;height:64px}
+.contact-avatar img{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:50% 14%;border:2px solid var(--gold-400);background:var(--wine-700)}
+.wa-dot{position:absolute;right:-5px;bottom:-5px;width:28px;height:28px;border-radius:50%;background:var(--wa);display:grid;place-items:center;border:3px solid var(--wine-900);color:#fff}
+.wa-dot .wa-ico{width:14px;height:14px}
+.contact-head h2{color:#fff;font-size:1.6rem;line-height:1.1;margin-bottom:5px}
+.contact-head p{font-size:.95rem;color:var(--on-dark-2);line-height:1.45}
+.contact-body{padding:20px 18px 22px}
+.topic-label{font-size:.88rem;font-weight:700;color:var(--copy);margin-bottom:10px}
+.wa-topics{display:grid;gap:8px;margin-bottom:16px}
+.wa-topic{display:flex;align-items:center;gap:12px;width:100%;min-height:62px;padding:11px 14px 11px 12px;border:1px solid var(--line);border-radius:14px;background:var(--page);color:var(--ink);text-decoration:none;font:600 .98rem/1.3 var(--sans);text-align:left;transition:border-color .2s,background-color .2s,transform .12s}
+.wa-topic:active{transform:scale(.985);border-color:var(--wine-600)}
+.t-ico{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--tint);color:var(--wine-600)}
+.t-ico svg{width:19px;height:19px}
+.wa-topic small{display:block;font-weight:400;font-size:.84rem;color:var(--muted);margin-top:2px}
+.t-go{margin-left:auto;flex:none;width:18px;height:18px;color:var(--muted)}
+@media (hover:hover){.wa-topic:hover{border-color:var(--wine-600);background:#fff}}
+.contact-meta{margin-top:14px;text-align:center;font-size:.9rem;color:var(--copy);line-height:1.5}
+.contact-meta b{color:var(--ink);font-weight:700;letter-spacing:.01em}
+.contact-meta[hidden]{display:none}
+.contact-privacy{display:flex;align-items:flex-start;justify-content:center;gap:8px;margin-top:12px;font-size:.82rem;line-height:1.45;color:var(--muted);text-align:center}
+.contact-privacy svg{flex:none;width:15px;height:15px;margin-top:2px;color:var(--muted)}
+.offer-help{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;margin-top:16px;padding:12px 10px 0;border:0;border-top:1px dashed var(--line-strong);background:none;color:var(--copy);font:500 .92rem/1.3 var(--sans);cursor:pointer}
+.offer-help b{color:var(--wine-600);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.offer-help .wa-ico{color:#1a9c4f;width:19px;height:19px}
+
+/* Painel de atendimento que sobe da parte de baixo da tela */
+.sheet{position:fixed;inset:auto 0 0 0;margin:0 auto;width:100%;max-width:560px;max-height:88vh;max-height:88dvh;overflow:auto;padding:8px 18px calc(18px + var(--safe-b));border:0;border-radius:24px 24px 0 0;background:var(--card);color:var(--ink);box-shadow:0 -24px 60px -20px rgba(43,8,17,.55);overscroll-behavior:contain;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.sheet[open]{animation:sheet-up .34s cubic-bezier(.2,.8,.2,1)}
+.sheet::backdrop{background:rgba(20,4,8,.55)}
+.sheet.dragging{transition:none}
+@keyframes sheet-up{from{transform:translateY(100%)}}
+.sheet-grab{display:block;width:100%;height:24px;margin:-4px 0 4px;border:0;background:none;cursor:grab;touch-action:none}
+.sheet-grab::before{content:"";display:block;width:44px;height:5px;border-radius:3px;background:var(--line-strong);margin:8px auto 0}
+.sheet-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;touch-action:none}
+.sheet-head .contact-avatar,.sheet-head .contact-avatar img{width:52px;height:52px}
+.sheet-head .wa-dot{width:24px;height:24px;border-color:#fff;right:-4px;bottom:-4px}
+.sheet-head .wa-dot .wa-ico{width:12px;height:12px}
+.sheet-head h2{font-size:1.32rem;line-height:1.15;margin-bottom:2px}
+.sheet-head p{font-size:.9rem;color:var(--muted);line-height:1.4}
+.sheet-close{margin-left:auto;align-self:flex-start;flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--tint);color:var(--wine-600);display:grid;place-items:center;cursor:pointer}
+.sheet-close svg{width:16px;height:16px}
+
 /* ---------- Barra de compra fixa (celular) ---------- */
-.sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:14px;padding:10px 14px calc(10px + var(--safe-b)) 18px;background:rgba(43,8,17,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:2px solid var(--gold-500);transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:12px;padding:10px 14px calc(10px + var(--safe-b)) 12px;background:rgba(43,8,17,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:2px solid var(--gold-500);transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .sticky.show{transform:none}
 .sticky-price{line-height:1.1;color:#fff}
 .sticky-price s{display:block;font-size:.78rem;color:var(--on-dark-3)}
 .sticky-price b{font:500 1.55rem/1 var(--serif);color:var(--gold-300)}
 .sticky-price small{display:block;font-size:.72rem;color:var(--on-dark-3);margin-top:2px}
-.sticky .btn{flex:1;min-height:52px;padding:12px 16px;font-size:.98rem}
+.sticky .btn{flex:1;min-height:52px;padding:12px 14px;font-size:.98rem;white-space:nowrap}
+.sticky-wa{flex:none;width:48px;height:48px;border-radius:50%;border:0;background:var(--wa);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 0 0 3px rgba(37,211,102,.18),0 8px 18px -8px rgba(37,211,102,.7);transition:transform .12s}
+.sticky-wa:active{transform:scale(.92)}
+.sticky-wa .wa-ico{width:26px;height:26px}
 
 /* ---------- Aviso rápido (substitui o alert) ---------- */
 .toast{position:fixed;left:50%;bottom:calc(96px + var(--safe-b));z-index:90;width:max-content;max-width:calc(100% - 32px);padding:13px 18px;border-radius:14px;background:#fff;color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--wine-600);font:600 .93rem/1.4 var(--sans);text-align:center;box-shadow:0 18px 40px -12px rgba(43,8,17,.55);opacity:0;transform:translate(-50%,16px);transition:opacity .25s,transform .25s;pointer-events:none}
@@ -460,6 +517,8 @@ section[hidden]{display:none!important}
   .creds{grid-template-columns:1fr}
   .price-now strong{font-size:4.2rem}
   .sticky-price small{display:none}
+  .sticky{gap:10px}
+  .sticky .btn{font-size:.92rem;padding-inline:10px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -469,6 +528,9 @@ section[hidden]{display:none!important}
 </style>
 </head>
 <body>
+
+<!-- Ícone do WhatsApp (usado em vários pontos da página) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol></svg>
 
 <!-- Progresso de leitura -->
 <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
@@ -485,6 +547,7 @@ section[hidden]{display:none!important}
       <a href="#depoimentos">Relatos</a>
       <a href="#oferta">Oferta</a>
       <a href="#duvidas">Dúvidas</a>
+      <a href="#contato">Contato</a>
     </div>
   </div>
 </nav>
@@ -695,14 +758,12 @@ section[hidden]{display:none!important}
         <div class="testi-body">
           <p class="testi-label" id="depoimento-leitora">Mensagem de uma leitora</p>
           <blockquote class="testi-quote">“Estou aprendendo muito com seu e-book! Obrigada por compartilhar seu conhecimento”</blockquote>
-          <p class="testi-sign"><span>Mensagem recebida pela autora e apresentada no registro original.</span></p>
         </div>
         <figure class="testi-print">
           <button type="button" class="print-thumb" id="printOpen" aria-label="Ampliar o print da mensagem da leitora">
             <img src="assets/depoimento-leitor.jpeg" alt="Print do depoimento de uma leitora: Estou aprendendo muito com seu e-book! Obrigada por compartilhar seu conhecimento. A autora agradece pelo retorno." width="1166" height="1600" loading="lazy" decoding="async">
             <span class="print-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M11 8v6M8 11h6"/></svg>Ver print completo</span>
           </button>
-          <figcaption>Registro da mensagem compartilhado pela autora</figcaption>
         </figure>
       </article>
     </div>
@@ -788,6 +849,7 @@ section[hidden]{display:none!important}
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Produto digital em PDF</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Garantia de 7 dias</span>
         </div>
+        <button type="button" class="offer-help" data-wa-open><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span>Dúvidas? <b>Fale no WhatsApp</b></span></button>
       </div>
     </div>
   </div>
@@ -813,6 +875,32 @@ section[hidden]{display:none!important}
   </div>
 </section>
 
+<!-- ============================== ATENDIMENTO (WHATSAPP) ==============================
+     O número é configurado uma vez só, em WHATSAPP_NUMBER, no script no fim da página. -->
+<section class="section alt" id="contato" aria-labelledby="titulo-contato">
+  <div class="wrap narrow">
+    <div class="contact-card">
+      <div class="contact-head">
+        <div class="contact-avatar">
+          <img src="assets/jessica-autora.jpeg" alt="" width="64" height="64" loading="lazy" decoding="async">
+          <span class="wa-dot" aria-hidden="true"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg></span>
+        </div>
+        <div>
+          <h2 id="titulo-contato">Ficou com alguma dúvida?</h2>
+          <p>Tire suas dúvidas pelo WhatsApp antes de comprar.</p>
+        </div>
+      </div>
+      <div class="contact-body">
+        <p class="topic-label">Escolha o assunto. A mensagem já vai pronta.</p>
+        <div class="wa-topics" data-wa-topics></div>
+        <a href="#" class="btn btn-wa btn-block" data-wa="geral"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>Conversar no WhatsApp</a>
+        <p class="contact-meta" data-wa-meta hidden></p>
+        <p class="contact-privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>A conversa abre no seu WhatsApp. Nada é enviado antes de você tocar em enviar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================== CTA FINAL ============================== -->
 <section class="section dark final" id="final" aria-labelledby="titulo-final">
   <div class="wrap">
@@ -830,11 +918,31 @@ section[hidden]{display:none!important}
 
 <!-- Barra de compra fixa (somente celular) -->
 <div class="sticky" id="stickyCta" data-mode="see">
+  <button type="button" class="sticky-wa" data-wa-open aria-label="Tirar dúvidas pelo WhatsApp"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg></button>
   <div class="sticky-price"><s>R$ 97</s><b>R$ 47</b><small>ou 5x no cartão</small></div>
   <a href="#oferta" class="btn btn-primary" id="stickyBtn">Ver oferta do e-book</a>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Painel de atendimento (abre pelo botão verde da barra fixa e pelo link da oferta) -->
+<dialog class="sheet" id="waSheet" aria-labelledby="waSheetTitle">
+  <button type="button" class="sheet-grab" aria-label="Fechar" data-sheet-close></button>
+  <div class="sheet-head">
+    <div class="contact-avatar">
+      <img src="assets/jessica-autora.jpeg" alt="" width="52" height="52" loading="lazy" decoding="async">
+      <span class="wa-dot" aria-hidden="true"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg></span>
+    </div>
+    <div>
+      <h2 id="waSheetTitle">Tirar dúvidas pelo WhatsApp</h2>
+      <p>Escolha o assunto. A mensagem já vai pronta.</p>
+    </div>
+    <button type="button" class="sheet-close" aria-label="Fechar" data-sheet-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="wa-topics" data-wa-topics></div>
+  <a href="#" class="btn btn-wa btn-block" data-wa="geral"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>Conversar no WhatsApp</a>
+  <p class="contact-meta" data-wa-meta hidden></p>
+</dialog>
 
 <script>
 /* =====================================================================
@@ -842,6 +950,11 @@ section[hidden]{display:none!important}
    Ele é aplicado automaticamente a todos os botões de compra.
    ===================================================================== */
 const CHECKOUT_URL = '#';
+
+/* WhatsApp para dúvidas: só números, com 55 + DDD + número. Ex.: '5531999998888' */
+const WHATSAPP_NUMBER = '5531987286752';
+/* Opcional: horário de atendimento mostrado abaixo do botão. Ex.: 'Seg. a sex., das 9h às 18h' */
+const WHATSAPP_HOURS = 'Seg. a sex., das 9h às 22h';
 
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
@@ -918,7 +1031,8 @@ const faq = [
   ["Como recebo o e-book?","Logo após a confirmação do pagamento, você recebe o PDF por e-mail."],
   ["Quem recebe o bônus de fichamento?","O modelo de fichamento desenvolvido pela autora é destinado aos 10 primeiros compradores, seguindo a ordem de confirmação do pagamento. O bônus será enviado separadamente após a verificação dos pedidos elegíveis."],
   ["Substitui meu orientador?","Não. Ele complementa a orientação e faz suas reuniões renderem muito mais."],
-  ["E se eu não gostar?","Você tem 7 dias de garantia com devolução integral."]
+  ["E se eu não gostar?","Você tem 7 dias de garantia com devolução integral."],
+  ["Tenho outra dúvida. Como posso perguntar?","Pelo WhatsApp: logo abaixo, escolha o assunto e a mensagem já abre pronta no seu celular."]
 ];
 const faqEl = $('#faq');
 faqEl.innerHTML = faq.map(q => `<details><summary>${q[0]}<span class="plus" aria-hidden="true"></span></summary><p>${q[1]}</p></details>`).join('');
@@ -954,6 +1068,82 @@ $('#shareBtn').addEventListener('click', async () => {
   } else {
     window.open('https://wa.me/?text=' + encodeURIComponent(text + ' ' + url), '_blank', 'noopener');
   }
+});
+
+/* ---------- Atendimento pelo WhatsApp ---------- */
+const WA_BASE = 'Olá! Vim pela página do e-book "Do Tema à Defesa".';
+const icon = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const waTopics = [
+  { id:'momento', title:'Serve para o meu momento?', sub:'Graduação ou pós-graduação',
+    msg: WA_BASE + ' Quero saber se o guia serve para o meu momento. Estou em: ',
+    ico: icon('<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>') },
+  { id:'pagamento', title:'Pagamento e acesso', sub:'Formas de pagamento e envio do PDF',
+    msg: WA_BASE + ' Tenho uma dúvida sobre pagamento e acesso ao material.',
+    ico: icon('<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/>') },
+  { id:'bonus', title:'Bônus de fichamento', sub:'Como funciona para os 10 primeiros',
+    msg: WA_BASE + ' Tenho uma dúvida sobre o bônus do modelo de fichamento.',
+    ico: icon('<rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M12 9v11M3 9h18M12 9c-2-4-6-4-6-1.5S10 9 12 9zm0 0c2-4 6-4 6-1.5S14 9 12 9z"/>') },
+  { id:'outra', title:'Outra dúvida', sub:'Escreva do seu jeito',
+    msg: WA_BASE + ' Tenho uma dúvida: ',
+    ico: icon('<path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/>') }
+];
+const waMsgs = { geral: WA_BASE + ' Gostaria de tirar uma dúvida.' };
+waTopics.forEach(t => waMsgs[t.id] = t.msg);
+const waDigits = WHATSAPP_NUMBER.replace(/\D/g, '');
+function waLink(id){ return waDigits ? 'https://wa.me/' + waDigits + '?text=' + encodeURIComponent(waMsgs[id] || waMsgs.geral) : '#'; }
+function fmtPhone(n){ const m = n.match(/^55(\d{2})(\d{4,5})(\d{4})$/); return m ? `(${m[1]}) ${m[2]}-${m[3]}` : '+' + n; }
+const goIco = '<svg class="t-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+$$('[data-wa-topics]').forEach(box => {
+  box.innerHTML = waTopics.map(t => `<a class="wa-topic" href="#" data-wa="${t.id}"><span class="t-ico">${t.ico}</span><span>${t.title}<small>${t.sub}</small></span>${goIco}</a>`).join('');
+});
+$$('[data-wa]').forEach(a => {
+  a.href = waLink(a.dataset.wa);
+  if (waDigits) { a.rel = 'noopener'; if (!isMobile()) a.target = '_blank'; }
+});
+$$('[data-wa-meta]').forEach(p => {
+  if (!waDigits) return;
+  p.innerHTML = `WhatsApp <b>${fmtPhone(waDigits)}</b>` + (WHATSAPP_HOURS ? `<br>${WHATSAPP_HOURS}` : '');
+  p.hidden = false;
+});
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-wa]');
+  if (!a) return;
+  buzz();
+  if (!waDigits) { e.preventDefault(); toast('O número do WhatsApp ainda não foi configurado.'); return; }
+  if (sheet.open) setTimeout(() => sheet.close(), 300);
+});
+
+/* Painel que sobe de baixo: abre pelo botão verde e pelo link da oferta; fecha no X,
+   tocando fora ou arrastando para baixo. */
+const sheet = $('#waSheet');
+let sheetOpen = false;
+function openSheet(){
+  buzz();
+  if (typeof sheet.showModal !== 'function') { location.href = '#contato'; return; }
+  sheet.style.transform = ''; sheet.showModal(); sheetOpen = true;
+  document.documentElement.classList.add('lock'); onScroll();
+}
+$$('[data-wa-open]').forEach(b => b.addEventListener('click', openSheet));
+$$('[data-sheet-close]').forEach(b => b.addEventListener('click', () => sheet.close()));
+sheet.addEventListener('close', () => { sheetOpen = false; document.documentElement.classList.remove('lock'); onScroll(); });
+sheet.addEventListener('click', e => {
+  const r = sheet.getBoundingClientRect();
+  if (e.clientY < r.top || e.clientX < r.left || e.clientX > r.right) sheet.close();
+});
+let dragY = null, dragDy = 0;
+$$('.sheet-grab, .sheet-head').forEach(h => {
+  h.addEventListener('touchstart', e => { dragY = e.touches[0].clientY; dragDy = 0; sheet.classList.add('dragging'); }, { passive:true });
+  h.addEventListener('touchmove', e => {
+    if (dragY === null) return;
+    dragDy = Math.max(0, e.touches[0].clientY - dragY);
+    sheet.style.transform = `translateY(${dragDy}px)`;
+  }, { passive:true });
+  h.addEventListener('touchend', () => {
+    sheet.classList.remove('dragging');
+    if (dragDy > 90) { sheet.style.transform = 'translateY(100%)'; setTimeout(() => sheet.close(), 220); }
+    else sheet.style.transform = '';
+    dragY = null;
+  });
 });
 
 /* ---------- Prévia: só aparece quando existir alguma página ---------- */
@@ -1006,9 +1196,34 @@ function updateSticky(y){
     if (mode === 'buy') { stickyBtn.textContent = 'Quero meu e-book'; stickyBtn.href = CHECKOUT_URL; stickyBtn.classList.add('checkout-link'); }
     else { stickyBtn.textContent = 'Ver oferta do e-book'; stickyBtn.href = '#oferta'; stickyBtn.classList.remove('checkout-link'); }
   }
-  sticky.classList.toggle('show', y > hero.offsetHeight - 80 && !buyVisible && !finalVisible && !lightboxOpen);
+  sticky.classList.toggle('show', y > hero.offsetHeight - 80 && !buyVisible && !finalVisible && !lightboxOpen && !sheetOpen);
 }
 stickyBtn.addEventListener('click', buzz);
+
+/* ---------- Livro que gira com a rolagem ----------
+   Entrando pela parte de baixo da tela, o livro aparece de lado (lombada);
+   no meio da tela fica de frente, com a capa legível; ao sair por cima,
+   termina de girar mostrando as páginas. */
+const books = $$('.book-scene').map(el => ({ el, offer: !!el.closest('.offer-head') }));
+function updateBooks(){
+  if (reduceMotion) return;
+  const vh = innerHeight;
+  books.forEach(({ el, offer }) => {
+    const r = el.getBoundingClientRect();
+    if (r.bottom < -80 || r.top > vh + 80) return;
+    const p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+    const ry = offer ? 30 - 40 * p : 32 - 60 * p;
+    const rx = offer ? 3 + 5 * p : 2 + 9 * p;
+    const rz = offer ? 0 : -2 + 3 * p;
+    const ty = (offer ? 16 : 34) * (0.5 - p);
+    el.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+    el.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+    el.style.setProperty('--rz', rz.toFixed(2) + 'deg');
+    el.style.setProperty('--ty', ty.toFixed(1) + 'px');
+    el.style.setProperty('--sh', (1 - Math.min(.35, Math.abs(ry) / 90)).toFixed(3));
+    el.style.setProperty('--so', (0.75 + 0.25 * (1 - Math.abs(ry) / 32)).toFixed(3));
+  });
+}
 
 /* ---------- Um único laço de rolagem ---------- */
 let ticking = false;
@@ -1017,7 +1232,7 @@ function onScroll(){
   requestAnimationFrame(() => {
     const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
     bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
-    updateNav(y); updateSticky(y); updateRoute();
+    updateNav(y); updateSticky(y); updateRoute(); updateBooks();
     ticking = false;
   });
 }
@@ -1027,9 +1242,10 @@ onScroll();
 </script>
 <script>
 /* ---------- Vídeo do YouTube ----------
-   Só baixa o player quando a pessoa chega perto da seção (economiza dados no 4G).
-   Começa sem som; "Assistir com som" liga o áudio e volta ao início.
-   Pausa ao sair da tela e retoma ao voltar. */
+   O player é baixado um pouco antes da seção (para estar pronto), mas o vídeo
+   só começa quando a pessoa chega nele, sempre do início e sem som.
+   "Assistir com som" liga o áudio e volta ao início.
+   Pausa ao sair da tela e retoma ao voltar. Legendas desligadas. */
 let player = null, ytRequested = false, started = false, resumeOnReturn = false, videoVisible = false;
 const soundBtn = document.getElementById('ytSoundBtn'), videoSec = document.getElementById('video');
 function requestYT(){
@@ -1039,17 +1255,33 @@ function requestYT(){
 window.onYouTubeIframeAPIReady = function(){
   player = new YT.Player('ytPlayer', {
     videoId: 'iRUPO_Uen4g',
-    playerVars: { autoplay: 0, controls: 1, playsinline: 1, rel: 0 },
+    playerVars: Object.assign(
+      { autoplay: 0, controls: 1, playsinline: 1, rel: 0, cc_load_policy: 0, iv_load_policy: 3, hl: 'pt-BR' },
+      /^https?:/.test(location.protocol) ? { origin: location.origin } : {}
+    ),
     events: {
-      onReady: e => { e.target.mute(); soundBtn.hidden = false; if (videoVisible && !reduceMotion) e.target.playVideo(); },
-      onStateChange: e => { if (e.data === 1) started = true; }
+      onReady: e => { e.target.mute(); killCaptions(); soundBtn.hidden = false; if (videoVisible) startFromTop(); },
+      onApiChange: killCaptions,
+      onStateChange: e => { if (e.data === 1) { started = true; killCaptions(); } }
     }
   });
 };
+/* Desliga as legendas automáticas do YouTube (inclusive as que ele liga sozinho em vídeo sem som). */
+function killCaptions(){
+  if (!player) return;
+  try { player.unloadModule('captions'); } catch (e) {}
+  try { player.unloadModule('cc'); } catch (e) {}
+  try { player.setOption('captions', 'track', {}); } catch (e) {}
+}
+/* Primeira vez que a pessoa chega ao vídeo: começa do zero, sem som. */
+function startFromTop(){
+  if (!player || started || reduceMotion) return;
+  player.seekTo(0, true); player.playVideo();
+}
 soundBtn.addEventListener('click', function(){
   if (!player) return;
   buzz();
-  player.unMute(); player.setVolume(100); player.seekTo(0, true); player.playVideo();
+  player.unMute(); player.setVolume(100); player.seekTo(0, true); player.playVideo(); killCaptions();
   this.hidden = true;
 });
 if ('IntersectionObserver' in window) {
@@ -1059,9 +1291,9 @@ if ('IntersectionObserver' in window) {
     if (!player || typeof player.getPlayerState !== 'function') return;
     if (videoVisible) {
       if (resumeOnReturn) { player.playVideo(); resumeOnReturn = false; }
-      else if (!started && !reduceMotion) player.playVideo();
+      else startFromTop();
     } else if (player.getPlayerState() === 1) { player.pauseVideo(); resumeOnReturn = true; }
-  }, { threshold: 0.35 }).observe(document.getElementById('ytBox'));
+  }, { threshold: 0.6 }).observe(document.getElementById('ytBox'));
 } else { requestYT(); }
 </script>
 </body>
